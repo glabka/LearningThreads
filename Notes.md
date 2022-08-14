@@ -2,6 +2,10 @@
 * good examples from multi-threading course on coursera are here https://github.com/Beerkay/JavaMultiThreading
 * intrinsic lock or monitor lock - in java API just monitor
 * don't call Thread.sleep but rather wait() method -> https://stackoverflow.com/questions/10663920/calling-thread-sleep-from-synchronized-context-in-java
+## missed signal
+* when notify call has no effect because the thread supposed to be notified is not sleeping yet.
+* one way to avoid this is to use semaphore.
+* other way how to avoid it is by changing and checking of state of the object (changing a variable).
 
 ## deadlock
 * definition: any situation in which no member of some group of entities can proceed because each waits for another member, including itself, to take action, such as sending a message or, more commonly, releasing a lock.
