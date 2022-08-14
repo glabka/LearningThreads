@@ -141,9 +141,10 @@ public class Logic {
     public void storeAll() {
         int counter = 0;
         while (counter < maxCount) {
+            String valueToBeStored = null;
             synchronized (processedQueue) {
                 if (!processedQueue.isEmpty()) {
-                    store(processedQueue.remove());
+                    valueToBeStored = processedQueue.remove();
                     counter++;
                     processedQueue.notify();
                 } else {
@@ -152,9 +153,12 @@ public class Logic {
                         processedQueue.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                    } finally {
+                        continue;
                     }
                 }
             }
+            store(valueToBeStored);
         }
     }
 
