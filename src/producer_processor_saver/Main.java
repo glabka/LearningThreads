@@ -5,26 +5,9 @@ public class Main {
     public static void main(String[] args) {
         Logic logic = new Logic(100, 5, 5, 1000, 5000, 1000);
 
-        Thread loader = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                logic.loadAll();
-            }
-        });
-
-        Thread processor = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                logic.processAll();
-            }
-        });
-
-        Thread storage = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                logic.storeAll();
-            }
-        });
+        Thread loader = new Thread(() -> logic.loadAll());
+        Thread processor = new Thread(() -> logic.processAll());
+        Thread storage = new Thread(() -> logic.storeAll());
 
         loader.start();
         processor.start();
