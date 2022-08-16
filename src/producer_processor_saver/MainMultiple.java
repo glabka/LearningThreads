@@ -15,26 +15,9 @@ public class MainMultiple {
         long start = System.nanoTime();
 
         for (int i = 0; i < 3; i++) {
-            executor.submit(new Runnable() {
-                @Override
-                public void run() {
-                    logic.loadAll();
-                }
-            });
-
-            executor.submit(new Runnable() {
-                @Override
-                public void run() {
-                    logic.processAll();
-                }
-            });
-
-            executor.submit(new Runnable() {
-                @Override
-                public void run() {
-                    logic.storeAll();
-                }
-            });
+            executor.submit(() -> logic.loadAll());
+            executor.submit(() -> logic.processAll());
+            executor.submit(() -> logic.storeAll());
         }
 
         executor.shutdown();
