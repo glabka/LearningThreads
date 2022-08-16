@@ -2,6 +2,15 @@
 * good examples from multi-threading course on coursera are here https://github.com/Beerkay/JavaMultiThreading
 * intrinsic lock or monitor lock - in java API just monitor
 * don't call Thread.sleep but rather wait() method -> https://stackoverflow.com/questions/10663920/calling-thread-sleep-from-synchronized-context-in-java
+* race conditions - conditions when several threads access the same data without mutex (lock) or semaphore or other synchronization. Threads load the same data and override each others results. It can depend on timing and switching of threads and therefore doesn't have to occur every time.
+* atomic operation - indivisible operation. Even assigning long variable value is not atomic -> first 32 bits can be written and then threads can be swapped. (solutions - volatile, synchronized or AtomicLong)
+* differs from hyper threading - hyper threading converts a single physical processor into two virtual processors
+* differs form multiprocessing - multiprocessing - more CPUs, more simultaneous processes, each has it's own separate address space. It is classified into symmetric (each process is self-scheduling, shared main memory, multiple processes applied to one problem - parallel programming) and asymmetric (not all CPUs are treated equally - there is master - runs task of the operating system. Specific tasks are assigned to CPUs based on priority etc  .).
+
+## missed signal
+* when notify call has no effect because the thread supposed to be notified is not sleeping yet.
+* one way to avoid this is to use semaphore.
+* other way how to avoid it is by changing and checking of state of the object (changing a variable).
 
 ## deadlock
 * definition: any situation in which no member of some group of entities can proceed because each waits for another member, including itself, to take action, such as sending a message or, more commonly, releasing a lock.
@@ -43,7 +52,8 @@
 
 ## ReentrantLock (is of Lock class)
 * alternative to synchronized block (start by lock ends by unlock method)
-* has ability to make lock fair (granting access to longest waiting thread)
+* vs synchronized keyword (my understanding)- ReentrantLock has less optimizations resulting in more overhead but thanks to more features can be used in a way that will be faster
+* has ability to make lock fair (granting access to longest waiting thread) - read more on https://stackoverflow.com/questions/65699934/reentrant-lock-condition-fairness
 * ability to check if lock is being held
 * always put unlock into finally statement
 * tryLock method - tries to acquire lock and returns boolean as result
@@ -55,7 +65,7 @@
 
 ## Semaphore class
 * semaphore limits number of simultaneous threads that can run
-* sempahore with limit one is mutex
+* sempahore with limit one is mutex (mutual exclusion)
 * acquire and release methods are used
 
 ## Callable and Future (interface and class)
